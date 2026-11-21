@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="StockQuoteProxy" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <call>
+                <endpoint>
+                    <address uri="http://localhost:9000/services/SimpleStockQuoteService"/>
+                </endpoint>
+            </call>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </target>
+    <publishWSDL preservePolicy="true" uri="file:/home/irfan/Documents/workspace/personal/wso2_mi_training/trainingexercises/wso2MI46DF/ProxyServices/sample_proxy_3.wsdl"/>
+</proxy>
