@@ -1,0 +1,7 @@
+{
+    "MI.Scope": "user",
+    "MI.LEGACY_EXPRESSION_ENABLED": false,
+    "MI.SERVER_PATH": "/home/irfan/Documents/workspace/jazz/wso2mi-4.6.0",
+    "MI.JAVA_HOME": "/usr/lib/jvm/java-1.21.0-openjdk-amd64",
+    "MI.useLocalMaven": false
+}
