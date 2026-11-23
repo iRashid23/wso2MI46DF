@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/healthcare" name="HealthcareAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/categories/{category}/reserve">
+        <inSequence>
+            <variable name="hospital_id" type="STRING" expression="${payload.hospital_id}"/>
+            <variable name="CardNumber" type="STRING" value="payload.cardNo"/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>
