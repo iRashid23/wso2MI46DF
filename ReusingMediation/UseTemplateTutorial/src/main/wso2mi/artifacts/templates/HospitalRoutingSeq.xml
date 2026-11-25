@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="HospitalRoutingSeq" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter isMandatory="false" name="sethospital"/>
+    <sequence>
+        <log category="INFO" logMessageID="false" logFullPayload="false">
+            <message>Routing to
+                params.functionParams.sethospital
+                ×</message>
+        </log>
+    </sequence>
+</template>

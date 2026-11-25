@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/healthcare" name="HealthcareAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/categories/{category}/reserve">
+        <inSequence>
+            <variable name="Hospital" type="STRING" expression="${payload.hospital}"/>
+        <switch source="${vars.Hospital}">
+            <case regex="grand oak community hospital">
+                <call-template target="HospitalRoutingSeq">
+                    <with-param name="sethospital" value="grandoaks"/>
+                </call-template>
+                <http.post configKey="GrandOakConn">
+                    <relativePath>/categories/${params.pathParams.category}/reserve</relativePath>
+                    <headers>[]</headers>
+                    <requestBodyType>JSON</requestBodyType>
+                    <requestBodyJson>${payload}</requestBodyJson>
+                    <forceScAccepted>false</forceScAccepted>
+                    <disableChunking>false</disableChunking>
+                    <forceHttp10>false</forceHttp10>
+                    <noKeepAlive>false</noKeepAlive>
+                    <forcePostPutNobody>false</forcePostPutNobody>
+                    <responseVariable>http_post_1</responseVariable>
+                    <overwriteBody>true</overwriteBody>
+                </http.post>
+            </case>
+            <case regex="clemency medical center">
+                <call-template target="HospitalRoutingSeq">
+                    <with-param name="sethospital" value="clemency"/>
+                </call-template>
+                <http.post configKey="ClemencyConn">
+                    <relativePath>/categories/${params.uriParams.category}/reserve</relativePath>
+                    <headers>[]</headers>
+                    <requestBodyType>JSON</requestBodyType>
+                    <requestBodyJson>${payload}</requestBodyJson>
+                    <forceScAccepted>false</forceScAccepted>
+                    <disableChunking>false</disableChunking>
+                    <forceHttp10>false</forceHttp10>
+                    <noKeepAlive>false</noKeepAlive>
+                    <forcePostPutNobody>false</forcePostPutNobody>
+                    <responseVariable>http_post_1</responseVariable>
+                    <overwriteBody>true</overwriteBody>
+                </http.post>
+            </case>
+            <case regex="pine valley community hospital">
+                <call-template target="HospitalRoutingSeq">
+                    <with-param name="sethospital" value="pinevalley"/>
+                </call-template>
+                <http.post configKey="PineValleyConn">
+                    <relativePath>/categories/${params.uriParams.category}/reserve</relativePath>
+                    <headers>[]</headers>
+                    <requestBodyType>JSON</requestBodyType>
+                    <requestBodyJson>${payload}</requestBodyJson>
+                    <forceScAccepted>false</forceScAccepted>
+                    <disableChunking>false</disableChunking>
+                    <forceHttp10>false</forceHttp10>
+                    <noKeepAlive>false</noKeepAlive>
+                    <forcePostPutNobody>false</forcePostPutNobody>
+                    <responseVariable>http_post_1</responseVariable>
+                    <overwriteBody>true</overwriteBody>
+                </http.post>
+            </case>
+            <default></default>
+        </switch>
+        <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>
