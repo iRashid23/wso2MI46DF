@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="JMStoHTTPStockQuoteProxy" startOnLoad="true" transports="jms"
+    xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <log level="custom">
+                <property name="JMStoHTTPStockQuoteProxy" value="Received JMS message and forwarding to HTTP endpoint" />
+            </log>
+            <property action="set" name="OUT_ONLY" value="true" />
+            <call>
+                <endpoint key="SimpleStockQuoteService" />
+            </call>
+        </inSequence>
+        <faultSequence/>
+    </target>
+    <parameter name="transport.jms.ContentType">
+        <rules>
+            <jmsProperty>contentType</jmsProperty>
+            <default>text/xml</default>
+        </rules>
+    </parameter>
+    <parameter name="transport.jms.ConnectionFactory">myQueueListener</parameter>
+    <parameter name="transport.jms.Destination">Queue1</parameter>
+</proxy>
