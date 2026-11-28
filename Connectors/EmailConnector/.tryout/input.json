@@ -1,0 +1,1 @@
+[{"name":"SendEmailPayload","content":{"from":"email1@gmail.com","to":"email2@gmail.com","subject":"Sample email","content":"This is the body of the sample email","contentType":"text/plain"}}]

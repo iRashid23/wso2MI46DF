@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="GmailIMAPConnection" xmlns="http://ws.apache.org/ns/synapse">
+  <email.init>
+    <connectionType>IMAPS</connectionType>
+    <host>imap.gmail.com</host>
+    <port>993</port>
+    <username>youremail@gmail.com</username>
+    <password>xxxx xxxx xxxx xxxx</password>
+    <enableOAuth2>false</enableOAuth2>
+    <name>GmailIMAPConnection</name>
+  </email.init>
+</localEntry>

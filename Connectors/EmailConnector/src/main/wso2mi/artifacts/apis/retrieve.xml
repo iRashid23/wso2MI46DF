@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/retrieve" name="retrieve" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/">
+        <inSequence>
+            <email.list configKey="GmailIMAPConnection">
+                <deleteAfterRetrieve>false</deleteAfterRetrieve>
+                <receivedSince></receivedSince>
+                <receivedUntil></receivedUntil>
+                <sentSince></sentSince>
+                <sentUntil></sentUntil>
+                <subjectRegex>{${payload.subjectRegex}}</subjectRegex>
+                <fromRegex></fromRegex>
+                <seen></seen>
+                <answered></answered>
+                <deleted></deleted>
+                <recent></recent>
+                <offset>0</offset>
+                <limit>2</limit>
+                <folder>Inbox</folder>
+                <responseVariable>email_list_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+            </email.list>
+
+
+
+            <foreach collection="${payload.emails}" parallel-execution="true" update-original="true"
+                continue-without-aggregation="false">
+                <sequence>
+                    <email.getEmailBody configKey="GmailIMAPConnection">
+                        <emailId>{${payload.emailId}}</emailId>
+                        <folder>Inbox</folder>
+                        <responseVariable>email_getEmailBody_1</responseVariable>
+                        <overwriteBody>true</overwriteBody>
+                    </email.getEmailBody>
+                <payloadFactory  media-type="json" template-type="default">
+        
+        <format>
+                            {"To":"${payload.email.to}","From":"${payload.email.from}","Subject":"${payload.email.subject}","Content":"${payload.email.textContent}"}</format>
+                    </payloadFactory>
+                </sequence>
+            </foreach>
+            <respond />
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>
